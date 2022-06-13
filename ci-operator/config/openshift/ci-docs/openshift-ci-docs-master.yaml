@@ -46,7 +46,7 @@ tests:
     htmlproofer \
       --root-dir /src/public/ \
       --check_sri \
-      --http-status-ignore 403,405 \
+      --http-status-ignore 403,405,429 \
       --hydra '{"max_concurrency": 1}' \
       --url-ignore "$(paste -sd , <<'EOF'
     /mojo.redhat.com/
