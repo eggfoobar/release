@@ -16,12 +16,11 @@ function delete_stacks()
     local stack_list=$1
     for stack_name in `tac ${stack_list}`; do 
         echo "Deleting stack ${stack_name} ..."
-        aws --region $REGION cloudformation delete-stack --stack-name "${stack_name}" &
-        wait "$!"
+        aws --region $REGION cloudformation delete-stack --stack-name "${stack_name}"
         echo "Deleted stack ${stack_name}"
 
-        aws --region $REGION cloudformation wait stack-delete-complete --stack-name "${stack_name}" &
-        wait "$!"
+        echo "Waiting for stack ${stack_name} resources to be deprovisioned ..."
+        aws --region $REGION cloudformation wait stack-delete-complete --stack-name "${stack_name}"
         echo "Waited for stack ${stack_name}"
     done
 }
