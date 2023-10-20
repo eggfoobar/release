@@ -198,14 +198,6 @@ tests:
     - chain: ipi-gcp-pre
     - ref: fips-check
     workflow: openshift-e2e-gcp
-- as: e2e-gcp-rt
-  cron: 50 22 7 */12 *
-  steps:
-    cluster_profile: gcp-openshift-gce-devel-ci-2
-    env:
-      COMPUTE_NODE_TYPE: n2-standard-8
-      RT_ENABLED: "true"
-    workflow: openshift-e2e-gcp-realtime
 - as: e2e-aws-serial
   cron: 9 3 10 */12 *
   steps:

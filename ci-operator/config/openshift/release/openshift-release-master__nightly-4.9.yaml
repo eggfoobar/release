@@ -339,14 +339,6 @@ tests:
           cpu: 100m
           memory: 200Mi
     workflow: ipi-aws
-- as: e2e-gcp-rt
-  cron: 16 10 */14 * *
-  steps:
-    cluster_profile: gcp-openshift-gce-devel-ci-2
-    env:
-      COMPUTE_NODE_TYPE: n2-standard-8
-      RT_ENABLED: "true"
-    workflow: openshift-e2e-gcp-realtime
 - as: e2e-aws-upgrade
   cron: 18 22 8,23 * *
   steps:
