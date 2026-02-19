@@ -507,6 +507,29 @@ tests:
       TEST_SKIPS: \[OCPFeatureGate:GatewayAPIController\]\[Feature:Router\]
       TEST_SUITE: openshift/conformance/serial
     workflow: openshift-e2e-aws-single-node
+- as: e2e-metal-ovn-single-node-4vcpu-32gb-compute-upgrade
+  cron: '@daily'
+  steps:
+    cluster_profile: equinix-edge-enablement
+    env:
+      DEVSCRIPTS_CONFIG: |
+        AGENT_E2E_TEST_SCENARIO=SNOMIN_IPV4
+      TEST_ARGS: --max-parallel-tests 10 --timeout 30m
+      TEST_SKIPS: \[FeatureGate:PodLevelResources\]\|\[FeatureGate:InPlacePodVerticalScaling\]\|
+        \[Feature:Builds\]\|\[OCPFeatureGate:GatewayAPIController\]\[Feature:Router\]\|\[apigroup:build.openshift.io\]
+      TEST_TYPE: upgrade-conformance
+    workflow: agent-e2e-generic-conformance
+  timeout: 5h0m0s
+- as: e2e-metal-ovn-single-node-4vcpu-32gb-compute-serial
+  cron: '@daily'
+  steps:
+    cluster_profile: equinix-edge-enablement
+    env:
+      DEVSCRIPTS_CONFIG: |
+        AGENT_E2E_TEST_SCENARIO=SNOMIN_IPV4
+      TEST_SKIPS: \[OCPFeatureGate:GatewayAPIController\]\[Feature:Router\]
+      TEST_SUITE: openshift/conformance/serial
+    workflow: agent-e2e-generic-conformance
 - as: e2e-metal-ovn-two-node-arbiter
   capabilities:
   - intranet
